@@ -7,11 +7,6 @@ var enemyNames = ["Roborto", "Amy Android", "Robo Trumble"];
 var enemyHealth = 50;
 var enemyAttack = 12;
 
-console.log(enemyNames);
-console.log(enemyNames.length);
-console.log(enemyNames[0]);
-console.log(enemyNames[3]);
-
 // fight function
 var fight = function(enemyName) {
     // repeat and execute as long as the enemy-robot is alive
@@ -20,7 +15,6 @@ var fight = function(enemyName) {
         var promptFight = window.prompt("Would you like to FIGHT or SKIP this battle? Enter 'FIGHT' or 'SKIP' to choose.");
 
         if (promptFight === "fight" || promptFight === "FIGHT");
-
         // if player picks "skip" confirm and then stop the loop
         else if (promptFight === "skip" || promptFight === "SKIP") {
             //confirm player wants to skip
@@ -36,7 +30,10 @@ var fight = function(enemyName) {
             }
         } else {
             window.alert("You need to choose a valid option. Try again!");
-        }
+            // HAVE TO CALL THE FUNCTION AGAIN SO THAT IT DOESNT CONTINUE RUNNING THE CODE. ALSO ADDED A BREAK SO DONT HAVE TWO INSTANCES OF YOUR FUNCTION RUNNING 
+            fight(enemyName);
+            break;
+        };
 
         //remove enemy's health by subtracting the amount set in playerAttack variable
         enemyHealth = enemyHealth - playerAttack;
@@ -100,4 +97,4 @@ for (var i = 0; i < enemyNames.length; i++) {
         window.alert("You have lost your robot in battle! Game Over!");
         break;
     }
-}
+};
