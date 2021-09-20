@@ -1,10 +1,47 @@
+var fightOrSkip = function() {
+    // ask player if they'd like to fight or skip using fightOrSkip function
+    var promptFight = window.prompt('Would you like to FIGHT or SKIP this battle? Enter "FIGHT" or "SKIP" to choose.');
+  
+    // Conditional Recursive Function Call
+    if (promptFight === "" || promptFight === null) {
+        window.alert("You need to provide a valid answer! Please try again.");
+        return fightOrSkip();
+    }
+  
+    // if player picks "skip" confirm and then stop the loop
+    promptFight = promptFight.toLowerCase();
+
+    if (promptFight === "skip") {
+      // confirm player wants to skip
+      var confirmSkip = window.confirm("Are you sure you'd like to quit?");
+  
+      // if yes (true), leave fight
+      if (confirmSkip) {
+        window.alert(playerInfo.name + " has decided to skip this fight. Goodbye!");
+        // subtract money from playerMoney for skipping
+        playerInfo.money = Math.max(0, playerInfo.money - 10);
+
+        //return true if player wants to leave
+        return true;
+      }
+      shop();
+    }
+    return false;
+}
+
 // fight function
 var fight = function(enemy) {
     // repeat and execute as long as the enemy-robot is alive
     while(playerInfo.health > 0 && enemy.health > 0) {
-        // ask player if they'd like to fight or run
-        var promptFight = window.prompt("Would you like to FIGHT or SKIP this battle? Enter 'FIGHT' or 'SKIP' to choose.");
-
+        fightOrSkip(); //<--replace code with this function call
+        // ask player if they'd like to fight or skip using fightOrSkip function
+        if (fightOrSkip()) {
+            // if true, then leave fight by breaking loop
+            break;
+        }
+        // fight logic below!
+        //var promptFight = window.prompt("Would you like to FIGHT or SKIP this battle? Enter 'FIGHT' or 'SKIP' to choose.");
+        /*
         if (promptFight === "fight" || promptFight === "FIGHT");
         // if player picks "skip" confirm and then stop the loop
         else if (promptFight === "skip" || promptFight === "SKIP") {
@@ -25,7 +62,7 @@ var fight = function(enemy) {
             fight(enemy.name);
             break;
         };
-
+            */
         
         // generate random damage value based on player's attack power
         var damage = randomNumber(playerInfo.attack - 3, playerInfo.attack);
